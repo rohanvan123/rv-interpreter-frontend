@@ -16,6 +16,7 @@ const parseData = (data: any) => {
     tokens: data.tokens,
     ast_trees: data.ast_sequence,
     program_output: data.progam_output,
+    error: undefined,
   };
 };
 
@@ -41,22 +42,33 @@ if (x > 5) {
   );
 
   const fetchData = async () => {
-    const res = await fetch(`${"http://127.0.0.1:5000/"}interpret`, {
+    const LOCAL_BACKEND_BASE = "http://127.0.0.1:5000";
+    const PROD_BACKEND_BASE = "https://rv-interpreter.onrender.com";
+    const res = await fetch(`${LOCAL_BACKEND_BASE}/interpret`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         code: preProcessCode(code),
       }),
     });
-    const data = await res.json();
-    console.log(data);
-    return data;
+
+    if (res.status != 200) {
+      return {
+        tokens: [],
+        ast_trees: [],
+        program_output: [],
+        error: res.status,
+      };
+    } else {
+      const data = await res.json();
+      return parseData(data);
+    }
   };
 
   const handleSubmission = async () => {
     setLoading(true);
     const data = await fetchData();
-    setResult(parseData(data));
+    setResult(data);
     setLoading(false);
   };
 

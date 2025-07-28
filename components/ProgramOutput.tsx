@@ -23,7 +23,14 @@ const ProgramOutput: FC<ProgramOutputProps> = ({ programResult, loading }) => {
             {loading ? (
               <LoadingIcon />
             ) : programResult ? (
-              <TokenSequences programResult={programResult} />
+              programResult.error !== undefined ? (
+                <div className="text-red-600 p-3 mt-6 rounded bg-red-100">
+                  Error: {programResult.error} (Check your code for syntax
+                  errors)
+                </div>
+              ) : (
+                <TokenSequences programResult={programResult} />
+              )
             ) : (
               <div className="bg-slate-300 p-[7px] mt-[30px] rounded-[5px]">
                 No Data
@@ -35,7 +42,19 @@ const ProgramOutput: FC<ProgramOutputProps> = ({ programResult, loading }) => {
             {loading ? (
               <LoadingIcon />
             ) : programResult ? (
-              <TreeSlider astTrees={programResult.ast_trees} />
+              programResult.error !== undefined ? (
+                <div className="text-red-600 p-3 mt-6 rounded bg-red-100">
+                  Error: {programResult.error} (Check your code for syntax
+                  errors)
+                </div>
+              ) : programResult.ast_trees &&
+                programResult.ast_trees.length > 0 ? (
+                <TreeSlider astTrees={programResult.ast_trees} />
+              ) : (
+                <div className="bg-slate-300 p-[7px] mt-[30px] rounded-[5px]">
+                  No Data
+                </div>
+              )
             ) : (
               <div className="bg-slate-300 p-[7px] mt-[30px] rounded-[5px]">
                 No Data

@@ -28,6 +28,10 @@ export default function Home() {
 
               {loading ? (
                 <LoadingIcon />
+              ) : result && result.error !== undefined ? (
+                <div className="text-red-600 p-3 mt-6 rounded bg-red-100">
+                  Error: {result.error} (Check your code for syntax errors)
+                </div>
               ) : (
                 <div className="bg-slate-300 p-[7px] mt-[30px] rounded-[5px]">
                   <div className="whitespace-pre-line">
