@@ -73,8 +73,8 @@ if (x > 5) {
   };
 
   return (
-    <div className="flex flex-row justify-center">
-      <div className="w-[95%] mt-[22px]">
+    <div className="flex flex-row justify-center w-[95%] mx-auto">
+      <div className="w-full">
         <Editor
           className="border-black border-[2px] rounded-t-lg h-[450px]"
           value={code}

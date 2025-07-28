@@ -23,7 +23,10 @@ const TokenSequences: FC<TokenSequencesProps> = ({ programResult }) => {
     <div className="flex flex-col gap-2 mt-[20px] ml-[20px]">
       {programResult.tokens.map((seq: string[], seq_idx: number) => {
         return (
-          <div key={seq_idx} className="flex flex-row gap-2 flex-wrap">
+          <div
+            key={seq_idx}
+            className="flex flex-row gap-2 flex-wrap text-[12px]"
+          >
             <span className="bg-green-500 p-[7px] rounded-[5px] hover:bg-green-800">
               LINE {seq_idx + 1}
             </span>

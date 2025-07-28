@@ -14,15 +14,15 @@ export default function Home() {
     <main className="w-full">
       <NavBar />
       <div className="flex flex-row mt-[80px]">
-        <div className="flex flex-col w-[40%]">
+        <div className="flex flex-col w-[60%] gap-[20px] mx-auto">
           <CodeEditor
             setResult={setResult}
             setLoading={setLoading}
             loading={loading}
           />
-          <div className="ml-[20px] w-[95%] mt-[20px]">
+          <div className="">
             <Container>
-              <span className="font-semibold text-[20px]">
+              <span className="font-semibold text-[16px]">
                 Execution Output
               </span>
 
