@@ -44,7 +44,7 @@ if (x > 5) {
   const fetchData = async () => {
     const LOCAL_BACKEND_BASE = "http://127.0.0.1:5000";
     const PROD_BACKEND_BASE = "https://rv-interpreter.onrender.com";
-    const res = await fetch(`${LOCAL_BACKEND_BASE}/interpret`, {
+    const res = await fetch(`${PROD_BACKEND_BASE}/interpret`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
