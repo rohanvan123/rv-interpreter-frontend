@@ -152,11 +152,18 @@ const constructTree = (treeString: string): RawNodeDatum => {
       const args = splitStringIntoArgs(inside_str);
       let access_tree: RawNodeDatum = {
         name: "ListAccess",
+        children: [constructTree(args[0]), constructTree(args[1])],
+      };
+      return access_tree;
+    }
+    case "ListModifyExp": {
+      const args = splitStringIntoArgs(inside_str);
+      let access_tree: RawNodeDatum = {
+        name: "ListModify",
         children: [
           constructTree(args[0]),
-          { name: "[" },
           constructTree(args[1]),
-          { name: "]" },
+          constructTree(args[2]),
         ],
       };
       return access_tree;
