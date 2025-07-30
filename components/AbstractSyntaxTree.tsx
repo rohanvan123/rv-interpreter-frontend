@@ -140,6 +140,27 @@ const constructTree = (treeString: string): RawNodeDatum => {
         children: [cond_tree, true_tree],
       };
     }
+    case "ListExp": {
+      let list_exps = splitStringIntoArgs(inside_str.slice(1, -1));
+      let list_tree: RawNodeDatum = {
+        name: "List",
+        children: list_exps.map((inner_exp) => constructTree(inner_exp)),
+      };
+      return list_tree;
+    }
+    case "ListAccessExp": {
+      const args = splitStringIntoArgs(inside_str);
+      let access_tree: RawNodeDatum = {
+        name: "ListAccess",
+        children: [
+          constructTree(args[0]),
+          { name: "[" },
+          constructTree(args[1]),
+          { name: "]" },
+        ],
+      };
+      return access_tree;
+    }
     default: {
       const args = splitStringIntoArgs(inside_str);
       let op = bin_op_string.get(args[0].trim());

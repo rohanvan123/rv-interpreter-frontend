@@ -32,12 +32,11 @@ const CodeEditor: FC<CodeEditorProps> = ({
   loading,
 }) => {
   const [code, setCode] = useState<string>(
-    `let x = 10;
-if (x > 5) {
-    print(true);
-    print(true);
-} else {
-    print(false);
+    `let x = [1, "hello", true];
+let i = 0;
+while (i < 3) {
+  print(x[i]);
+  i = i + 1;
 }`
   );
 
