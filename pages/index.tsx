@@ -34,7 +34,7 @@ export default function Home() {
                 </div>
               ) : (
                 <div className="bg-slate-300 p-[7px] mt-[30px] rounded-[5px]">
-                  <div className="whitespace-pre-line">
+                  <div className="whitespace-pre-line break-all">
                     {result && Array.isArray(result.program_output)
                       ? result.program_output.map(
                           (line: string, idx: number) => (

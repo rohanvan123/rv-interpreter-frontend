@@ -76,7 +76,7 @@ if (x > 5) {
     <div className="flex flex-row justify-center w-[95%] mx-auto">
       <div className="w-full">
         <Editor
-          className="border-black border-[2px] rounded-t-lg h-[450px]"
+          className="border-black border-[2px] rounded-t-lg h-[400px]"
           value={code}
           onValueChange={(code) => setCode(code)}
           highlight={(code) => code}
