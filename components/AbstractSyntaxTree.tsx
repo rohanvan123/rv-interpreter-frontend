@@ -10,6 +10,7 @@ const bin_op_string = new Map<string, string>([
   ["IntMinusOp", "-"],
   ["IntTimesOp", "*"],
   ["IntDivOp", "/"],
+  ["PowOp", "^"],
   ["ModOp", "%"],
   ["GtOp", ">"],
   ["GteOp", ">="],
