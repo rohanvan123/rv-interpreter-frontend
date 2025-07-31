@@ -34,7 +34,7 @@ const CodeEditor: FC<CodeEditorProps> = ({
   const [code, setCode] = useState<string>(
     `let x = [1, "hello", true];
 let i = 0;
-while (i < 3) {
+while (i < size(x)) {
   print(x[i]);
   i = i + 1;
 }`

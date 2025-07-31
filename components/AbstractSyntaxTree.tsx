@@ -88,7 +88,17 @@ const constructTree = (treeString: string): RawNodeDatum => {
     }
     case "MonadicExp": {
       const args = splitStringIntoArgs(inside_str);
-      let mon_op = args[0] == "Print" ? "print" : "-";
+      let mon_op;
+      switch (args[0]) {
+        case "Print":
+          mon_op = "print";
+          break;
+        case "Size":
+          mon_op = "size";
+          break;
+        default:
+          mon_op = "-";
+      }
       const right_tree = constructTree(args[1]);
       return { name: "Unary", children: [{ name: mon_op }, right_tree] };
     }
