@@ -26,19 +26,25 @@ interface CodeEditorProps {
   loading: boolean;
 }
 
+const defaultCode = `let x = [1, "hello", true];
+
+function funkyPrint(a) {
+  print(string(a) + ", " + type(a));
+}
+
+let i = 0;
+while (i < size(x)) {
+  funkyPrint(x[i]);
+  i += 1;
+}
+`;
+
 const CodeEditor: FC<CodeEditorProps> = ({
   setResult,
   setLoading,
   loading,
 }) => {
-  const [code, setCode] = useState<string>(
-    `let x = [1, "hello", true];
-let i = 0;
-while (i < size(x)) {
-  print(x[i]);
-  i = i + 1;
-}`
-  );
+  const [code, setCode] = useState<string>(defaultCode);
 
   const fetchData = async () => {
     const BACKEND_BASE = process.env.NEXT_PUBLIC_BACKEND_BASE;

@@ -23,6 +23,7 @@ const bin_op_string = new Map<string, string>([
 ]);
 
 const splitStringIntoArgs = (inside_str: string) => {
+  if (inside_str.length === 0) return [];
   let inner_idx = 0;
   let args = [];
   let curr_arg = "";
@@ -178,6 +179,65 @@ const constructTree = (treeString: string): RawNodeDatum => {
         ],
       };
       return access_tree;
+    }
+    case "Return": {
+      const args = splitStringIntoArgs(inside_str);
+      console.log(args);
+      return {
+        name: "Return",
+        children: args.length === 0 ? [] : [constructTree(args[0])],
+      };
+    }
+    case "FuncAssignExp": {
+      const args = splitStringIntoArgs(inside_str);
+      console.log(args);
+      let name_node: RawNodeDatum = {
+        name: args[0],
+      };
+      // console.log(args);
+
+      let arg_names = splitStringIntoArgs(args[1].slice(1, -1)); // parse list of expressions
+      let arg_tree: RawNodeDatum = {
+        name: "ARGS",
+        children: arg_names.map(
+          (arg) =>
+            ({
+              name: arg,
+            } as RawNodeDatum)
+        ),
+      };
+
+      let body_exps = splitStringIntoArgs(args[2].slice(1, -1));
+      let body_tree: RawNodeDatum = {
+        name: "BODY",
+        children: body_exps.map((body_exp) => {
+          // console.log(body_exp);
+          return constructTree(body_exp);
+        }),
+      };
+
+      return {
+        name: "Function Declare",
+        children: [name_node, arg_tree, body_tree],
+      };
+    }
+    case "FuncCallExp": {
+      const args = splitStringIntoArgs(inside_str);
+      let name_node: RawNodeDatum = {
+        name: args[0],
+      };
+      // console.log(args);
+
+      let arg_exps = splitStringIntoArgs(args[1].slice(1, -1)); // parse list of expressions
+      let arg_tree: RawNodeDatum = {
+        name: "ARGS",
+        children: arg_exps.map((arg_exp) => constructTree(arg_exp)),
+      };
+
+      return {
+        name: "Function Call",
+        children: [name_node, arg_tree],
+      };
     }
     default: {
       const args = splitStringIntoArgs(inside_str);
